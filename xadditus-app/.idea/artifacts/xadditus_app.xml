@@ -1,0 +1,29 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="xadditus_app">
+    <output-path>$PROJECT_DIR$/out/artifacts/xadditus_app</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="com.linoagli.java.xadditus.controllers.Main" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="nativeBundle" value="exe" />
+        <option name="title" value="Xadditus" />
+        <option name="vendor" value="Faye-Lino Agli" />
+        <option name="version" value="" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="xadditus_app.jar">
+        <element id="module-output" name="Xadditus App" />
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="extracted-dir" path="$PROJECT_DIR$/libs/lino_agli_javafx_library.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$PROJECT_DIR$/libs/xadditus_core.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$PROJECT_DIR$/libs/lino-agli-java-library.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$PROJECT_DIR$/libs/comm-protocols-1.1.jar" path-in-jar="/" />
+      </element>
+      <element id="file-copy" path="$PROJECT_DIR$/nircmd.exe" />
+    </root>
+  </artifact>
+</component>

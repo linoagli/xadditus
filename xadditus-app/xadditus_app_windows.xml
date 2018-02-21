@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="xadditus-app" default="all">
+  
+  
+  <property file="xadditus_app_windows.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.ear"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+  <path id="jdk.classpath.1.8">
+    <fileset dir="${jdk.home.1.8}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/ext/access-bridge-64.jar"/>
+      <include name="jre/lib/ext/cldrdata.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/jfxrt.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/nashorn.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunmscapi.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxswt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.comm-protocols-1.1.classpath">
+    <pathelement location="${basedir}/libs/comm-protocols-1.1.jar"/>
+  </path>
+  
+  <path id="library.lino-agli-java-library.classpath">
+    <pathelement location="${basedir}/libs/lino-agli-java-library.jar"/>
+  </path>
+  
+  <path id="library.lino_agli_javafx_library.classpath">
+    <pathelement location="${basedir}/libs/lino_agli_javafx_library.jar"/>
+  </path>
+  
+  <path id="library.xadditus_core.classpath">
+    <pathelement location="${basedir}/libs/xadditus_core.jar"/>
+  </path>
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module Xadditus App -->
+  
+  <dirname property="module.xadditus_app.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.xadditus_app" value="${jdk.home.1.8}"/>
+  <property name="module.jdk.bin.xadditus_app" value="${jdk.bin.1.8}"/>
+  <property name="module.jdk.classpath.xadditus_app" value="jdk.classpath.1.8"/>
+  
+  <property name="compiler.args.xadditus_app" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="xadditus_app.output.dir" value="${module.xadditus_app.basedir}/out/production/Xadditus App"/>
+  <property name="xadditus_app.testoutput.dir" value="${module.xadditus_app.basedir}/out/test/Xadditus App"/>
+  
+  <path id="xadditus_app.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="xadditus_app.module.production.classpath">
+    <path refid="${module.jdk.classpath.xadditus_app}"/>
+    <path refid="library.lino_agli_javafx_library.classpath"/>
+    <path refid="library.xadditus_core.classpath"/>
+    <path refid="library.lino-agli-java-library.classpath"/>
+    <path refid="library.comm-protocols-1.1.classpath"/>
+  </path>
+  
+  <path id="xadditus_app.runtime.production.module.classpath">
+    <pathelement location="${xadditus_app.output.dir}"/>
+    <path refid="library.lino_agli_javafx_library.classpath"/>
+    <path refid="library.xadditus_core.classpath"/>
+    <path refid="library.lino-agli-java-library.classpath"/>
+    <path refid="library.comm-protocols-1.1.classpath"/>
+  </path>
+  
+  <path id="xadditus_app.module.classpath">
+    <path refid="${module.jdk.classpath.xadditus_app}"/>
+    <pathelement location="${xadditus_app.output.dir}"/>
+    <path refid="library.lino_agli_javafx_library.classpath"/>
+    <path refid="library.xadditus_core.classpath"/>
+    <path refid="library.lino-agli-java-library.classpath"/>
+    <path refid="library.comm-protocols-1.1.classpath"/>
+  </path>
+  
+  <path id="xadditus_app.runtime.module.classpath">
+    <pathelement location="${xadditus_app.testoutput.dir}"/>
+    <pathelement location="${xadditus_app.output.dir}"/>
+    <path refid="library.lino_agli_javafx_library.classpath"/>
+    <path refid="library.xadditus_core.classpath"/>
+    <path refid="library.lino-agli-java-library.classpath"/>
+    <path refid="library.comm-protocols-1.1.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.xadditus_app">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.xadditus_app">
+    <patternset refid="excluded.from.module.xadditus_app"/>
+  </patternset>
+  
+  <path id="xadditus_app.module.sourcepath">
+    <dirset dir="${module.xadditus_app.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.xadditus_app" depends="compile.module.xadditus_app.production,compile.module.xadditus_app.tests" description="Compile module Xadditus App"/>
+  
+  <target name="compile.module.xadditus_app.production" depends="register.custom.compilers" description="Compile module Xadditus App; production classes">
+    <mkdir dir="${xadditus_app.output.dir}"/>
+    <javac2 destdir="${xadditus_app.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.xadditus_app}/javac">
+      <compilerarg line="${compiler.args.xadditus_app}"/>
+      <bootclasspath refid="xadditus_app.module.bootclasspath"/>
+      <classpath refid="xadditus_app.module.production.classpath"/>
+      <src refid="xadditus_app.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.xadditus_app"/>
+    </javac2>
+    
+    <copy todir="${xadditus_app.output.dir}">
+      <fileset dir="${module.xadditus_app.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.xadditus_app.tests" depends="register.custom.compilers,compile.module.xadditus_app.production" description="compile module Xadditus App; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.xadditus_app" description="cleanup module">
+    <delete dir="${xadditus_app.output.dir}"/>
+    <delete dir="${xadditus_app.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.xadditus_app, clean.artifact.xadditus_app" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.xadditus_app" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.xadditus_app" value="${basedir}/out/artifacts/xadditus_app"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="artifact.temp.output.xadditus_app" value="${artifacts.temp.dir}/xadditus_app.jar"/>
+    <taskdef resource="com/sun/javafx/tools/ant/antlib.xml" uri="javafx:com.sun.javafx.tools.ant" classpath=".:${jdk.home.1.8}/lib/ant-javafx.jar"/>
+  </target>
+  
+  <target name="clean.artifact.xadditus_app" description="clean xadditus_app artifact output">
+    <delete dir="${artifact.output.xadditus_app}"/>
+  </target>
+  
+  <target name="artifact.xadditus_app" depends="init.artifacts, compile.module.xadditus_app" description="Build &#39;xadditus_app&#39; artifact" xmlns:fx="javafx:com.sun.javafx.tools.ant">
+    <mkdir dir="${artifact.output.xadditus_app}"/>
+    <copy todir="${artifact.temp.output.xadditus_app}">
+      <fileset dir="${xadditus_app.output.dir}"/>
+    </copy>
+    <mkdir dir="${artifact.temp.output.xadditus_app}/META-INF"/>
+    <copy file="${basedir}/META-INF/MANIFEST.MF" tofile="${artifact.temp.output.xadditus_app}/META-INF/MANIFEST.MF"/>
+    <unzip src="${basedir}/libs/lino_agli_javafx_library.jar" dest="${artifact.temp.output.xadditus_app}"/>
+    <unzip src="${basedir}/libs/xadditus_core.jar" dest="${artifact.temp.output.xadditus_app}"/>
+    <unzip src="${basedir}/libs/lino-agli-java-library.jar" dest="${artifact.temp.output.xadditus_app}"/>
+    <unzip src="${basedir}/libs/comm-protocols-1.1.jar" dest="${artifact.temp.output.xadditus_app}"/>
+    <copy file="${basedir}/nircmd.exe" tofile="${artifact.temp.output.xadditus_app}/nircmd.exe"/>
+    <fx:fileset id="all_but_xadditus_app" dir="${artifact.temp.output.xadditus_app}" includes="**/*.jar">
+      <exclude name="xadditus_app.jar"/>
+    </fx:fileset>
+    <fx:fileset id="all_xadditus_app" dir="${artifact.temp.output.xadditus_app}" includes="**/*.jar"/>
+    <fx:application id="xadditus_app_id" name="xadditus_app" mainClass="com.linoagli.java.xadditus.controllers.Main" version="2018.02.19"/>
+    <fx:jar destfile="${artifact.temp.output.xadditus_app}/xadditus_app.jar">
+      <fx:application refid="xadditus_app_id"/>
+      <fileset dir="${artifact.temp.output.xadditus_app}" excludes="**/*.jar"/>
+      <fx:resources>
+        <fx:fileset refid="all_but_xadditus_app"/>
+      </fx:resources>
+      <manifest>
+        <attribute name="Implementation-Title" value="Xadditus"/>
+        <attribute name="Implementation-Version" value=""/>
+        <attribute name="Implementation-Vendor" value="Faye-Lino Agli"/>
+      </manifest>
+    </fx:jar>
+    <fx:deploy width="600" height="400" updatemode="background" outdir="${artifact.temp.output.xadditus_app}/deploy" outfile="xadditus_app" nativeBundles="exe" verbose="true">
+      <fx:application refid="xadditus_app_id"/>
+      <fx:info title="Xadditus" vendor="Faye-Lino Agli"/>
+      <fx:resources>
+        <fx:fileset refid="all_xadditus_app"/>
+      </fx:resources>
+    </fx:deploy>
+    <copy todir="${artifact.output.xadditus_app}">
+      <fileset dir="${artifact.temp.output.xadditus_app}/deploy"/>
+    </copy>
+    <delete includeemptydirs="true">
+      <fileset dir="${artifact.temp.output.xadditus_app}"/>
+    </delete>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.xadditus_app" description="Build all artifacts">
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>

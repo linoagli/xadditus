@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Xadditus</string>
+
+    <string name="activity_deviceScan">Device Scan</string>
+    <string name="activity_inputInterface">Input Interface</string>
+    <string name="activity_help">Useful Tips</string>
+
+    <string name="button_microphoneOn">Microphone On</string>
+    <string name="button_microphoneOff">Microphone Off</string>
+    <string name="button_run">Run</string>
+    <string name="button_next">Next</string>
+    <string name="button_prev">Previous</string>
+    <string name="button_volumeUp">Volume Up</string>
+    <string name="button_volumeDown">Volume Down</string>
+    <string name="button_altF4">Alt+F4</string>
+
+    <string name="menu_scan">Scan</string>
+    <string name="menu_keyboard">Keyboard</string>
+    <string name="menu_mouse">Mouse</string>
+    <string name="menu_keyboardMouse">Keys &amp; Mouse</string>
+    <string name="menu_microphone">Microphone</string>
+    <string name="menu_audioVideo">Audio Video</string>
+    <string name="menu_screenCapture">Screen Capture</string>
+    <string name="menu_switchToWifiMode">Switch scanner to WIFI mode</string>
+    <string name="menu_switchToBluetoothMode">Switch scanner to Bluetooth mode</string>
+    <string name="menu_terminal">Terminal</string>
+    <string name="menu_osControls">Operating System Controls</string>
+    <string name="menu_help">Help</string>
+    <string name="menu_downloadPCClient">Download PC Client</string>
+    <string name="menu_disconnect">Disconnect</string>
+
+    <string name="string_serviceIsRunning">Service is running</string>
+    <string name="string_connectionsServiceUnreachable">Connections services is unreachable!</string>
+    <string name="string_connecting">Connecting…</string>
+    <string name="string_searching">Searching…</string>
+    <string name="string_showMouse">Show Mouse</string>
+    <string name="string_mouseSpeed">Mouse Speed</string>
+    <string name="string_scanWifi">Scan: WIFI</string>
+    <string name="string_scanBluetooth">Scan: Bluetooth</string>
+    <string name="string_connectedTo">Connected to: %s</string>
+    <string name="string_connectionInactiveClosingActivity">Connection to device no longer valid. Goodbye!</string>
+    <string name="string_bluetoothOff">Bluetooth is off. Consider turning it on to scan for Bluetooth devices.</string>
+    <string name="string_wifiOff">Wifi is Off. Consider turning it on to  scan for Wifi devices.</string>
+</resources>

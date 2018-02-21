@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: Olubusayo K. Faye-Lino Agli -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:background="#fff">
+
+    <LinearLayout
+        android:id="@+id/ll_help_bottomControls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_help_prev"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/margin_default"
+            android:drawableLeft="@drawable/ic_arrow_back_white_24dp"
+            android:text="@string/button_prev" />
+
+        <Button
+            android:id="@+id/bt_help_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/margin_default"
+            android:drawableRight="@drawable/ic_arrow_forward_white_24dp"
+            android:text="@string/button_next" />
+
+    </LinearLayout>
+
+    <com.linoagli.compoundviews.ViewPagerExtended
+        android:id="@+id/fw_help_pages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ll_help_bottomControls"
+        android:layout_margin="@dimen/margin_default" />
+
+</RelativeLayout>

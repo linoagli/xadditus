@@ -1,0 +1,27 @@
+- Installing bluecove:
+
+for ubuntu version:
+sudo apt-get install libbluetooth-dev
+
+for fedora version:
+yum install bluez-libs-devel
+
+- Configuring the bluetooth deamon with the "-C" or "--compat" option:
+
+Open a terminal and enter
+sudo nano /etc/systemd/system/bluetooth.target.wants/bluetooth.service
+then change line
+ExecStart=/usr/lib/bluetooth/bluetoothd
+to
+ExecStart=/usr/lib/bluetooth/bluetoothd -C
+(simply adding the -C option)
+
+Now you need to restart the system daemons: sudo systemctl daemon-reload
+And finally restart the bluetooth service: sudo systemctl restart bluetooth
+
+- Fixing SDP permission issue:
+
+Open a terminal and enter
+sudo chmod a+wrx /run/sdp
+
+Note: you may need to run the above command (sudo chmod a+wrx /run/sdp) on session start because this does not seem to persist across reboots.
