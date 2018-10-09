@@ -20,10 +20,18 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/tv_keyboard_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".7"
+        android:textSize="@dimen/textSize_small"
+        android:gravity="center" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight=".2"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <include
@@ -119,7 +127,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight=".2"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <include
@@ -215,7 +223,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight=".2"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <View
@@ -309,7 +317,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight=".2"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <include
@@ -395,7 +403,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight=".2"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <include

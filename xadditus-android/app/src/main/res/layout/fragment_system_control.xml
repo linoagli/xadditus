@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: Faye-Lino Agli -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin_largest"
+    android:gravity="center">
+
+    <Button
+        android:id="@+id/bt_systemControl_altF4"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="@dimen/margin_default"
+        android:drawableStart="@drawable/ic_close_black_24dp"
+        android:text="@string/button_altF4" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_systemControl_volumeDown"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/margin_default"
+            android:drawableStart="@drawable/ic_volume_down_black_24dp"
+            android:text="@string/button_volumeDown" />
+
+        <Button
+            android:id="@+id/bt_systemControl_volumeUp"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/margin_default"
+            android:drawableStart="@drawable/ic_volume_up_black_24dp"
+            android:text="@string/button_volumeUp" />
+
+    </LinearLayout>
+
+</LinearLayout>

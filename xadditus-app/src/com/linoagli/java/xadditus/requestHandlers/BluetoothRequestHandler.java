@@ -51,11 +51,9 @@ public class BluetoothRequestHandler implements BluetoothServer.Callback
             String packetTypeString = st.nextToken();
             PacketEncoding.PacketType packetType = PacketEncoding.PacketType.valueOf(packetTypeString);
 
-            StringBuilder sb = new StringBuilder();
-            sb.append(packetTypeString);
-            sb.append(Constants.STRING_TOKENIZER_DELIMITOR);
-
-            String response = null;
+            String response = new StringBuilder()
+                .append(packetTypeString)
+                .append(Constants.STRING_TOKENIZER_DELIMITOR).toString();
 
             switch (packetType)
             {
@@ -92,7 +90,8 @@ public class BluetoothRequestHandler implements BluetoothServer.Callback
                     break;
 
                 case KeyDown:
-                    RequestHandlerEngine.doKeyDown(st);
+                    response += RequestHandlerEngine.doKeyDown(st);
+                    bluetoothServer.respond(response);
                     break;
 
                 case KeyUp:
@@ -100,42 +99,13 @@ public class BluetoothRequestHandler implements BluetoothServer.Callback
                     break;
 
                 case AsciiKeyDown:
-                    RequestHandlerEngine.doAsciiKeyDown(st);
+                    response += RequestHandlerEngine.doAsciiKeyDown(st);
+                    bluetoothServer.respond(response);
                     break;
 
                 case AsciiKeyUp:
                     RequestHandlerEngine.doAsciiKeyUp(st);
                     break;
-
-//                case RemoteDesktopScreenCapture:
-//                    RequestHandlerEngine.doRemoteDesktopScreenCapture(sb);
-//                    bluetoothServer.respond(sb.toString());
-//                    break;
-//
-//                case RemoteDesktopTouchDown:
-//                    RequestHandlerEngine.doRemoteDesktopTouchDown(st);
-//                    break;
-//
-//                case RemoteDesktopTouchUp:
-//                    RequestHandlerEngine.doRemoteDesktopTouchUp(st);
-//                    break;
-//
-//                case RemoteDesktopTouchMove:
-//                    RequestHandlerEngine.doRemoteDesktopTouchMove(st);
-//                    break;
-
-//                case AudioOutputList:
-//                    response = RequestHandlerEngine.doAudioOutputList();
-//                    bluetoothServer.respond(response);
-//                    break;
-//
-//                case SetAudioOutPut:
-//                    RequestHandlerEngine.doSetAudioOutPut(st);
-//                    break;
-//
-//                case AudioData:
-//                    RequestHandlerEngine.doAudioData(st);
-//                    break;
 
                 case TerminalCommand:
                     RequestHandlerEngine.doTerminalCommand(st, null, bluetoothServer);

@@ -34,7 +34,7 @@
 
 
         <activity
-            android:name="com.linoagli.android.xadditus.activities.input.InputInterfaceActivity"
+            android:name="com.linoagli.android.xadditus.activities.InputInterfaceActivity"
             android:label="@string/activity_inputInterface"
             android:launchMode="singleTask"
             android:screenOrientation="sensorPortrait"
@@ -42,7 +42,7 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name="com.linoagli.android.xadditus.activities.help.HelpActivity"
+            android:name="com.linoagli.android.xadditus.activities.HelpActivity"
             android:label="@string/activity_help"
             android:theme="@style/Theme.AppCompat.Dialog.Alert"
             android:launchMode="singleTask"
@@ -57,7 +57,7 @@
             android:enabled="true" />
 
         <receiver
-            android:name=".broadcastReceivers.NotificationBroadcastReceivers"
+            android:name=".broadcastReceivers.NotificationReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>

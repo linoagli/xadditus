@@ -61,11 +61,8 @@ public class RequestHandlerEngine {
         return response;
     }
 
-    public static String doDataSync() {
-        return new StringBuilder()
-            .append(PacketEncoding.PacketType.DataSync.toString())
-            .append(Constants.STRING_TOKENIZER_DELIMITOR)
-            .toString();
+    public static void doDataSync() {
+        //
     }
 
     public static void doMouseMove(StringTokenizer st) {
@@ -154,16 +151,25 @@ public class RequestHandlerEngine {
         }
     }
 
-    public static void doKeyDown(StringTokenizer st) {
+    public static String doKeyDown(StringTokenizer st) {
+        String responsePart = "";
         try {
             PacketEncoding.KeyboardKeys key = PacketEncoding.KeyboardKeys.valueOf(st.nextToken());
             int keyCode = keyboardKeyToCode(key);
+            new Robot().keyPress(keyCode);
 
-            if (keyCode != -1) new Robot().keyPress(keyCode);
+            responsePart = new StringBuilder()
+                .append(key.toString())
+                .append(Constants.STRING_TOKENIZER_DELIMITOR)
+                .append((char) keyCode)
+                .append(Constants.STRING_TOKENIZER_DELIMITOR)
+                .toString();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
+
+        return responsePart;
     }
 
     public static void doKeyUp(StringTokenizer st) {
@@ -178,14 +184,22 @@ public class RequestHandlerEngine {
         }
     }
 
-    public static void doAsciiKeyDown(StringTokenizer st) {
+    public static String doAsciiKeyDown(StringTokenizer st) {
+        String responsePart = "";
         try {
-            int keycode = Integer.valueOf(st.nextToken());
-            new Robot().keyPress(keycode);
+            int keyCode = Integer.valueOf(st.nextToken());
+            new Robot().keyPress(keyCode);
+
+            responsePart = new StringBuilder()
+                .append((char) keyCode)
+                .append(Constants.STRING_TOKENIZER_DELIMITOR)
+                .toString();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
+
+        return responsePart;
     }
 
     public static void doAsciiKeyUp(StringTokenizer st) {
@@ -314,33 +328,31 @@ public class RequestHandlerEngine {
         try {
             String command = st.nextToken();
 
-            Services.shell.setInputStreamReaderCallback((line) ->
-                                                        {
-                                                            System.out.println("shell v: " + line);
+            Services.shell.setInputStreamReaderCallback((line) -> {
+                System.out.println("shell v: " + line);
 
-                                                            StringBuilder sb = new StringBuilder();
-                                                            sb.append(PacketEncoding.PacketType.TerminalVerboseOutput.toString()).append(Constants.STRING_TOKENIZER_DELIMITOR);
-                                                            sb.append(line).append(Constants.STRING_TOKENIZER_DELIMITOR);
+                StringBuilder sb = new StringBuilder();
+                sb.append(PacketEncoding.PacketType.TerminalVerboseOutput.toString()).append(Constants.STRING_TOKENIZER_DELIMITOR);
+                sb.append(line).append(Constants.STRING_TOKENIZER_DELIMITOR);
 
-                                                            if (sourceDataPacket != null)
-                                                                UDPSender.send(sourceDataPacket.address, sourceDataPacket.port, sb.toString());
-                                                            if (bluetoothServer != null)
-                                                                bluetoothServer.respond(sb.toString());
-                                                        });
+                if (sourceDataPacket != null)
+                    UDPSender.send(sourceDataPacket.address, sourceDataPacket.port, sb.toString());
+                if (bluetoothServer != null)
+                    bluetoothServer.respond(sb.toString());
+            });
 
-            Services.shell.setErrorStreamReaderCallback((line) ->
-                                                        {
-                                                            System.out.println("shell e: " + line);
+            Services.shell.setErrorStreamReaderCallback((line) -> {
+                System.out.println("shell e: " + line);
 
-                                                            StringBuilder sb = new StringBuilder();
-                                                            sb.append(PacketEncoding.PacketType.TerminalErrorOutput.toString()).append(Constants.STRING_TOKENIZER_DELIMITOR);
-                                                            sb.append(line).append(Constants.STRING_TOKENIZER_DELIMITOR);
+                StringBuilder sb = new StringBuilder();
+                sb.append(PacketEncoding.PacketType.TerminalErrorOutput.toString()).append(Constants.STRING_TOKENIZER_DELIMITOR);
+                sb.append(line).append(Constants.STRING_TOKENIZER_DELIMITOR);
 
-                                                            if (sourceDataPacket != null)
-                                                                UDPSender.send(sourceDataPacket.address, sourceDataPacket.port, sb.toString());
-                                                            if (bluetoothServer != null)
-                                                                bluetoothServer.respond(sb.toString());
-                                                        });
+                if (sourceDataPacket != null)
+                    UDPSender.send(sourceDataPacket.address, sourceDataPacket.port, sb.toString());
+                if (bluetoothServer != null)
+                    bluetoothServer.respond(sb.toString());
+            });
 
             Services.shell.run(command);
         }

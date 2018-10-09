@@ -31,11 +31,33 @@ public class TCPRequestHandler implements TCPServer.Callback {
             String packetTypeString = st.nextToken();
             PacketEncoding.PacketType packetType = PacketEncoding.PacketType.valueOf(packetTypeString);
 
-            String response = "";
+            String response = new StringBuilder()
+                .append(packetTypeString)
+                .append(Constants.STRING_TOKENIZER_DELIMITOR).toString();
 
             switch (packetType) {
                 case DataSync:
-                    response = RequestHandlerEngine.doDataSync();
+                    RequestHandlerEngine.doDataSync();
+                    break;
+
+                case KeyDown:
+                    response += RequestHandlerEngine.doKeyDown(st);
+                    break;
+
+                case KeyUp:
+                    RequestHandlerEngine.doKeyUp(st);
+                    break;
+
+                case AsciiKeyDown:
+                    response += RequestHandlerEngine.doAsciiKeyDown(st);
+                    break;
+
+                case AsciiKeyUp:
+                    RequestHandlerEngine.doAsciiKeyUp(st);
+                    break;
+
+                case AltF4:
+                    RequestHandlerEngine.doAltF4();
                     break;
             }
 

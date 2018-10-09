@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight=".5"
-        android:name="com.linoagli.android.xadditus.activities.input.fragments.TouchPadFragment"
+        android:name="com.linoagli.android.xadditus.fragments.TouchPadFragment"
         tools:layout="@layout/fragment_touchpad"
         android:tag="touchPadFragment"/>
 
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight=".5"
-        android:name="com.linoagli.android.xadditus.activities.input.fragments.KeyboardFragment"
+        android:name="com.linoagli.android.xadditus.fragments.KeyboardFragment"
         tools:layout="@layout/fragment_keyboard"
         android:tag="keyboardFragment" />
 

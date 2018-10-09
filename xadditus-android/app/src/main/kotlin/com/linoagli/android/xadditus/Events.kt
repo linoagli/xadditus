@@ -7,11 +7,12 @@ package com.linoagli.android.xadditus
 
 import com.linoagli.java.XadditusCore.Models.Device
 
+
 class DeviceScanStartedEvent
 class DeviceFoundEvent(val device: Device)
 class DeviceSelectedEvent(val device: Device)
 class DataReceivedEvent(val data: String)
 
-class SendRequestEvent(val request: String)
+class SendRequestEvent(val request: String, val preferTcp: Boolean = false)
 
 class ConnectionInactiveDetectedEvent

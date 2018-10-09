@@ -13,10 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.linoagli.android.xadditus.R;
 import com.linoagli.android.xadditus.DeviceSelectedEvent;
-import com.linoagli.android.xadditus.helpers.SystemInfo;
-import com.linoagli.android.xadditus.helpers.Utils;
+import com.linoagli.android.xadditus.R;
+import com.linoagli.android.xadditus.utils.SystemInfo;
 import com.linoagli.java.XadditusCore.Models.Device;
 import org.greenrobot.eventbus.EventBus;
 
@@ -38,7 +37,7 @@ public class DeviceScanListAdapter extends RecyclerView.Adapter<DeviceScanListAd
 
         int osThumbnailRes = R.drawable.pc_logo;
         boolean isBluetoothDevice = device.address == null && device.data != null;
-        SystemInfo.OperatingSystem os = SystemInfo.INSTANCE.getOperatingSystemFromName(device.osName);
+        SystemInfo.OperatingSystem os = SystemInfo.getOperatingSystemFromName(device.osName);
 
         if (isBluetoothDevice) {
             osThumbnailRes = R.drawable.bluetooth_logo;

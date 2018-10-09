@@ -9,7 +9,7 @@ package com.linoagli.android.xadditus.scanners;
 
 import android.content.Context;
 import com.linoagli.android.xadditus.DeviceFoundEvent;
-import com.linoagli.android.xadditus.helpers.Utils;
+import com.linoagli.android.xadditus.utils.NetworkUtils;
 import com.linoagli.comprotocols.DataPacket;
 import com.linoagli.comprotocols.udp.UDPListener;
 import com.linoagli.comprotocols.udp.UDPSender;
@@ -52,7 +52,7 @@ public class UDPScanner implements UDPListener.Callback {
                 String osName = st.nextToken();
                 String osVersion = st.nextToken();
 
-                final Device device = new Device(name, osName, osVersion, dataPacket.address, Utils.INSTANCE.getConnectionSSID(context));
+                final Device device = new Device(name, osName, osVersion, dataPacket.address, NetworkUtils.getConnectionSSID(context));
 
                 System.out.println("Network device found: " + name + "; " + osName + "; " + osVersion);
                 EventBus.getDefault().post(new DeviceFoundEvent(device));
@@ -78,7 +78,7 @@ public class UDPScanner implements UDPListener.Callback {
         System.out.println("Attempting to scan the current networked for devices...");
 
         try {
-            InetAddress broadcastAddress = InetAddress.getByName(Utils.INSTANCE.getBroadcastIpAddress(context));
+            InetAddress broadcastAddress = InetAddress.getByName(NetworkUtils.getBroadcastIpAddress(context));
 
             StringBuilder sb = new StringBuilder();
             sb.append(PacketEncoding.PacketType.Scan.toString());

@@ -60,13 +60,12 @@ public class UDPRequestHandler implements UDPServer.Callback {
             String packetTypeString = st.nextToken();
             PacketEncoding.PacketType packetType = PacketEncoding.PacketType.valueOf(packetTypeString);
 
-            String response = null;
-
             switch (packetType) {
-                case Scan:
-                    response = RequestHandlerEngine.doScan();
+                case Scan: {
+                    String response = RequestHandlerEngine.doScan();
                     UDPSender.send(dataPacket.address, dataPacket.port, response);
                     break;
+                }
 
                 case MouseMove:
                     RequestHandlerEngine.doMouseMove(st);
@@ -100,52 +99,6 @@ public class UDPRequestHandler implements UDPServer.Callback {
                     RequestHandlerEngine.doMouseRightClick();
                     break;
 
-//                case KeyDown:
-//                    RequestHandlerEngine.doKeyDown(st);
-//                    break;
-//
-//                case KeyUp:
-//                    RequestHandlerEngine.doKeyUp(st);
-//                    break;
-//
-//                case AsciiKeyDown:
-//                    RequestHandlerEngine.doAsciiKeyDown(st);
-//                    break;
-//
-//                case AsciiKeyUp:
-//                    RequestHandlerEngine.doAsciiKeyUp(st);
-//                    break;
-
-//                case RemoteDesktopScreenCapture:
-//                    RequestHandlerEngine.doRemoteDesktopScreenCapture(sb);
-//                    UDPSender.send(dataPacket.address, Constants.SOCKET_PORT_UDP, sb.toString());
-//                    break;
-//
-//                case RemoteDesktopTouchDown:
-//                    RequestHandlerEngine.doRemoteDesktopTouchDown(st);
-//                    break;
-//
-//                case RemoteDesktopTouchUp:
-//                    RequestHandlerEngine.doRemoteDesktopTouchUp(st);
-//                    break;
-//
-//                case RemoteDesktopTouchMove:
-//                    RequestHandlerEngine.doRemoteDesktopTouchMove(st);
-//                    break;
-
-//                case AudioOutputList:
-//                    response = RequestHandlerEngine.doAudioOutputList();
-//                    UDPSender.send(dataPacket.address, dataPacket.port, response);
-//                    break;
-//
-//                case SetAudioOutPut:
-//                    RequestHandlerEngine.doSetAudioOutPut(st);
-//                    break;
-//
-//                case AudioData:
-//                    RequestHandlerEngine.doAudioData(st);
-//                    break;
-
                 case TerminalCommand:
                     RequestHandlerEngine.doTerminalCommand(st, dataPacket, null);
                     break;
@@ -156,10 +109,6 @@ public class UDPRequestHandler implements UDPServer.Callback {
 
                 case OperatingSystemVolumeDown:
                     RequestHandlerEngine.doOperatingSystemVolumeDown();
-                    break;
-
-                case AltF4:
-                    RequestHandlerEngine.doAltF4();
                     break;
 
                 case LaunchTerminal:

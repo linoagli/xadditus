@@ -19,12 +19,10 @@
 package com.linoagli.android.xadditus.activities;
 
 import android.Manifest;
-import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -36,29 +34,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import com.linoagli.android.xadditus.Constants;
-import com.linoagli.android.xadditus.R;
-import com.linoagli.android.xadditus.Runtime;
-import com.linoagli.android.xadditus.helpers.SharedPrefsHelper;
-import com.linoagli.android.xadditus.activities.help.HelpActivity;
-import com.linoagli.android.xadditus.activities.input.InputInterfaceActivity;
+import com.linoagli.android.xadditus.*;
 import com.linoagli.android.xadditus.adapters.DeviceScanListAdapter;
 import com.linoagli.android.xadditus.base.BaseActivity;
-import com.linoagli.android.xadditus.DeviceFoundEvent;
-import com.linoagli.android.xadditus.DeviceScanStartedEvent;
-import com.linoagli.android.xadditus.DeviceSelectedEvent;
-import com.linoagli.android.xadditus.helpers.Utils;
 import com.linoagli.android.xadditus.services.ConnectionService;
+import com.linoagli.android.xadditus.utils.NetworkUtils;
+import com.linoagli.android.xadditus.utils.SharedPrefsHelper;
 import com.linoagli.java.XadditusCore.Models.Device;
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.net.ConnectException;
 import java.util.concurrent.TimeUnit;
 
 public class DeviceScanActivity extends BaseActivity implements View.OnClickListener {
@@ -163,25 +152,25 @@ public class DeviceScanActivity extends BaseActivity implements View.OnClickList
             return;
         }
 
-        if (!Utils.INSTANCE.isConnectedToWifi(this)) {
+        if (!NetworkUtils.isConnectedToWifi(this)) {
             Toast.makeText(this, getString(R.string.string_wifiOff), Toast.LENGTH_SHORT).show();
         }
 
-        if (!Utils.INSTANCE.isConnectedToBluetooth()) {
+        if (!NetworkUtils.isConnectedToBluetooth()) {
             Toast.makeText(this, getString(R.string.string_bluetoothOff), Toast.LENGTH_SHORT).show();
         }
 
         Completable completable = Completable.create(
             e -> {
                 System.out.println("Initiating scan...");
-                Runtime.INSTANCE.getDeviceScanner().startScan(DeviceScanActivity.this);
+                AppRuntime.deviceScanner.startScan(DeviceScanActivity.this);
                 e.onComplete();
             })
             .delay(20, TimeUnit.SECONDS)
             .andThen(Completable.create(
                 e -> {
                     System.out.println("Finishing scan...");
-                    Runtime.INSTANCE.getDeviceScanner().stopScan();
+                    AppRuntime.deviceScanner.stopScan();
                     e.onComplete();
                 })
             )
@@ -200,9 +189,9 @@ public class DeviceScanActivity extends BaseActivity implements View.OnClickList
     private void connectToDevice(Device device) {
         Completable completable = Completable.create(
             e -> {
-                Runtime.INSTANCE.getDeviceScanner().stopScan();
+                AppRuntime.deviceScanner.stopScan();
 
-                boolean didStartService = Runtime.INSTANCE.getConnectionsManager().startService(device);
+                boolean didStartService = AppRuntime.connectionsManager.startService(device);
 
                 if (didStartService) {
                     SharedPrefsHelper.save(DeviceScanActivity.this, Constants.PREFS_LAST_SELECTED_DEVICE, device.name);

@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.linoagli.android.xadditus.R;
-import com.linoagli.android.xadditus.activities.input.fragments.Terminal.TerminalEntry;
+import com.linoagli.android.xadditus.utils.TerminalEntry;
 
 import java.util.ArrayList;
 import java.util.List;
