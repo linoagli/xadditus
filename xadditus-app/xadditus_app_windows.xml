@@ -252,7 +252,7 @@
       <exclude name="xadditus_app.jar"/>
     </fx:fileset>
     <fx:fileset id="all_xadditus_app" dir="${artifact.temp.output.xadditus_app}" includes="**/*.jar"/>
-    <fx:application id="xadditus_app_id" name="xadditus_app" mainClass="com.linoagli.java.xadditus.controllers.Main" version="2018.06.11"/>
+    <fx:application id="xadditus_app_id" name="xadditus_app" mainClass="com.linoagli.java.xadditus.controllers.Main" version="2018.08.09"/>
     <fx:jar destfile="${artifact.temp.output.xadditus_app}/xadditus_app.jar">
       <fx:application refid="xadditus_app_id"/>
       <fileset dir="${artifact.temp.output.xadditus_app}" excludes="**/*.jar"/>
