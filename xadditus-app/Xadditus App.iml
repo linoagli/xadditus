@@ -11,5 +11,6 @@
     <orderEntry type="library" name="xadditus_core" level="project" />
     <orderEntry type="library" name="lino-agli-java-library" level="project" />
     <orderEntry type="library" name="comm-protocols-1.1" level="project" />
+    <orderEntry type="library" name="openjfx" level="application" />
   </component>
 </module>

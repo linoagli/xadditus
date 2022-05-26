@@ -7,10 +7,14 @@
 package com.linoagli.android.xadditus.services;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.app.TaskStackBuilder;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
@@ -67,6 +71,14 @@ public class ConnectionService extends Service {
     private Notification createNotification() {
         String title = String.format(Locale.getDefault(), getString(R.string.string_connectedTo), AppRuntime.connectionsManager.getDevice().name);
 
+        final String notificationChannelId = ConnectionService.class.getName();
+        NotificationChannel notificationChannel = new NotificationChannel(notificationChannelId, "Connection Service", NotificationManager.IMPORTANCE_NONE);
+        notificationChannel.setLightColor(Color.BLUE);
+        notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.createNotificationChannel(notificationChannel);
+
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this)
             .addParentStack(DeviceScanActivity.class)
             .addNextIntent(new Intent(this, InputInterfaceActivity.class));
@@ -81,7 +93,7 @@ public class ConnectionService extends Service {
             new Intent(com.linoagli.android.xadditus.Constants.INTENT_ACTION_REQUEST_DECREASE_SYSTEM_VOLUME),
             PendingIntent.FLAG_UPDATE_CURRENT);
 
-        return new NotificationCompat.Builder(this, "xadditus")
+        return new NotificationCompat.Builder(this, notificationChannelId)
             .setContentTitle(title)
             .setContentIntent(contentIntent)
             .setShowWhen(false)
